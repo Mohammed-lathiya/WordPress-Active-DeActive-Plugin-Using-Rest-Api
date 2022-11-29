@@ -14,16 +14,16 @@ add_action( 'rest_api_init', function () {
 function my_plugin_active( $data ) {	
 	$plugin = 'akismet/akismet.php';
 	$current = get_option( 'active_plugins' );
-    $plugin = plugin_basename( trim( $plugin ) );
-    if ( !in_array( $plugin, $current ) ) {
-        $current[] = $plugin;
-        sort( $current );
-        do_action( 'activate_plugin', trim( $plugin ) );
-        update_option( 'active_plugins', $current );
-        do_action( 'activate_' . trim( $plugin ) );
-        do_action( 'activated_plugin', trim( $plugin) );
+	$plugin = plugin_basename( trim( $plugin ) );
+	if ( !in_array( $plugin, $current ) ) {
+		$current[] = $plugin;
+		sort( $current );
+		do_action( 'activate_plugin', trim( $plugin ) );
+		update_option( 'active_plugins', $current );
+		do_action( 'activate_' . trim( $plugin ) );
+		do_action( 'activated_plugin', trim( $plugin) );
 		echo "Done";
-    }else{
+	}else{
 		echo "Error";
 	}	
 }
@@ -31,17 +31,16 @@ function my_plugin_active( $data ) {
 function my_plugin_deactive( $data ) {
 	$plugin = 'akismet/akismet.php';
 	$current = get_option( 'active_plugins' );
-    $plugin_basename = plugin_basename( trim( $plugin ) );	
-    if ( in_array( $plugin_basename, $current ) ) {		
+  $plugin_basename = plugin_basename( trim( $plugin ) );	
+	if ( in_array( $plugin_basename, $current ) ) {		
 		$key = array_search($plugin,$current);
 		unset($current[$key]);
 		update_option( 'active_plugins', $current );		
-        do_action( 'deactivate_' . trim( $plugin_basename ) );
-        do_action( 'deactivate_plugins', trim( $plugin_basename) );
+		do_action( 'deactivate_' . trim( $plugin_basename ) );
+		do_action( 'deactivate_plugins', trim( $plugin_basename) );
 		echo "Done";
-    }else{
+	}else{
 		echo "Error";
-	}	
+	}
 }
-
 ?>
